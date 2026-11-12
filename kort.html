@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talekort – Flyttelasset · Demokratiløftet</title>
+<meta name="description" content="Utskrivbare talekort for en kort tale om å flytte kommunen fra Facebook. Fra Demokratiløftet.">
+<meta name="theme-color" content="#161615">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #161615;
+  --text: #e8e6e1;
+  --muted: #b0ada5;
+  --line: #2e2d2a;
+  --ink: #1d1d1b;
+  --paper: #fdfdfb;
+  --red: #e0524a;
+  --blue: #a9cbe4;
+  --orange: #f2801e;
+  --green: #8dc63f;
+  --mustard: #d8c830;
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 400 17px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; }
+
+.intro { max-width: 1040px; margin: 0 auto; padding: 40px 32px 8px; }
+.intro .back { color: var(--muted); text-decoration: none; font-weight: 600; }
+.intro .back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.intro h1 {
+  font-family: var(--serif); font-weight: 800; letter-spacing: -.01em;
+  font-size: clamp(40px, 8vw, 72px); line-height: 1; margin: 20px 0 12px;
+}
+.intro h1 span { color: var(--orange); }
+.intro p { max-width: 40em; margin: 0 0 12px; color: var(--muted); }
+
+.deck {
+  max-width: 1040px; margin: 0 auto; padding: 32px 32px 80px;
+  display: grid; gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+}
+.sheet { display: contents; }
+
+/*
+  Kortet: standard talekort / indekskort, 127 × 76 mm (5 × 3 tommer).
+  Alle mål regnes i --mm, som er 1/127 av kortets bredde, slik at kortet
+  har samme proporsjoner på skjerm og papir.
+*/
+.card {
+  container-type: inline-size;
+  aspect-ratio: 127 / 76;
+  background: var(--paper); color: var(--ink);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.2), 0 10px 24px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.in {
+  --mm: calc(100cqi / 127);
+  --rule: calc(6.2 * var(--mm));
+  height: 100%;
+  display: flex; flex-direction: column;
+  padding: calc(5 * var(--mm)) calc(7 * var(--mm)) calc(4 * var(--mm));
+  font-size: calc(3.9 * var(--mm));
+}
+.in header {
+  display: flex; align-items: flex-end; gap: calc(2.5 * var(--mm));
+  height: calc(10 * var(--mm));
+  border-bottom: calc(.5 * var(--mm)) solid var(--red);
+  padding-bottom: calc(1 * var(--mm));
+}
+.in .no {
+  font-weight: 700; font-size: .72em; letter-spacing: .06em; color: #8a877f;
+  padding-bottom: .35em;
+}
+.in h2 {
+  flex: 1;
+  font-family: var(--serif); font-weight: 800; font-size: 1.4em; line-height: 1.05;
+  margin: 0;
+}
+.in .e { font-size: 2em; line-height: 1; transform: rotate(-6deg); }
+
+.body {
+  flex: 1;
+  margin-top: calc(2.5 * var(--mm));
+  line-height: var(--rule);
+  background: repeating-linear-gradient(to bottom,
+    transparent 0 calc(var(--rule) - 1px),
+    var(--blue) calc(var(--rule) - 1px) var(--rule));
+}
+.body p { margin: 0; padding-left: 1em; text-indent: -1em; }
+.body p::before { content: "–"; display: inline-block; width: 1em; text-indent: 0; color: var(--red); font-weight: 700; }
+.body p.say { font-family: var(--serif); font-weight: 600; font-style: italic; }
+.body p.say::before { content: "»"; }
+.body b { font-weight: 700; }
+/* Ny seksjon: én tom linje over, så teksten fortsatt står på linjene */
+.body .sp { margin-top: var(--rule); }
+
+/* Forside og bakside */
+.cover, .back { background: var(--bg); color: var(--text); }
+.cover .in, .back .in {
+  justify-content: space-between;
+  padding: calc(7 * var(--mm)) calc(8 * var(--mm));
+}
+.cover .kicker, .back .kicker {
+  margin: 0; font-weight: 700; font-size: .78em; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+.cover .big {
+  font-family: var(--serif); font-weight: 800; letter-spacing: -.02em;
+  font-size: calc(15 * var(--mm)); line-height: .9; margin: 0 0 calc(3 * var(--mm));
+  white-space: nowrap;
+}
+.cover .big > span:first-child { color: var(--orange); }
+.cover .big .e, .back .big .e {
+  display: inline-block; font-size: .5em; vertical-align: .4em; transform: rotate(12deg);
+}
+.cover .sub {
+  font-family: var(--serif); font-size: calc(5.6 * var(--mm)); line-height: 1.2; margin: 0;
+}
+.swatch { display: flex; height: calc(1.8 * var(--mm)); width: calc(60 * var(--mm)); }
+.swatch i { flex: 1; }
+.back .big {
+  font-family: var(--serif); font-weight: 800;
+  font-size: calc(9.5 * var(--mm)); line-height: 1; margin: 0;
+}
+.back .a { color: #9fd3e8; }
+.back .b { color: #f4877e; }
+.back .c { color: var(--green); }
+.back .url {
+  margin: 0 0 calc(1.5 * var(--mm)); font-weight: 700; font-size: calc(5 * var(--mm));
+  color: var(--orange);
+}
+
+/* Punkter side om side */
+.cols {
+  display: grid; grid-template-columns: repeat(var(--n, 3), 1fr);
+  column-gap: calc(4 * var(--mm));
+}
+.cols > div { border-left: calc(.35 * var(--mm)) solid var(--red); padding-left: calc(2 * var(--mm)); }
+.cols h3 {
+  margin: 0; font-size: 1em; font-weight: 700; line-height: var(--rule);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cols h3 span { margin-right: .3em; }
+.cols .t { margin: 0; padding: 0; text-indent: 0; font-size: .92em; }
+.cols .t::before { content: none; }
+
+/* Utskrift: A4 liggende, fire kort per ark med klippelinjer */
+@page { size: A4 landscape; margin: 0; }
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .intro { display: none; }
+  .deck { display: block; max-width: none; padding: 0; }
+  .sheet {
+    display: grid; place-content: center;
+    grid-template-columns: 127mm 127mm;
+    grid-auto-rows: 76mm;
+    width: 297mm; height: 209.8mm;
+    break-after: page; page-break-after: always;
+  }
+  .sheet:last-child { break-after: auto; page-break-after: auto; }
+  .card {
+    width: 127mm; height: 76mm; aspect-ratio: auto;
+    border-radius: 0; box-shadow: none;
+    outline: .25mm dashed #bbb; outline-offset: -.125mm;
+  }
+}
+
+@media (max-width: 560px) {
+  .intro, .deck { padding-left: 16px; padding-right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <a class="back" href="./">← Tilbake til Flyttelasset</a>
+  <h1>Tale<span>kort</span></h1>
+  <p>Seks kort for en kort tale, ett for hvert poeng, med forside og bakside. Linjer med » kan sies rett ut, resten er stikkord.</p>
+  <p>Standard talekort, 127 × 76 mm. Utkast.</p>
+</div>
+
+<main class="deck">
+
+  <div class="sheet">
+    <article class="card cover"><div class="in">
+      <p class="kicker">Demokratiløftet · Talekort</p>
+      <div>
+        <h2 class="big">Flytte<span>lasset</span> <span class="e" aria-hidden="true">📦</span></h2>
+        <p class="sub">Facebook-flyttehjelp for kommuner</p>
+      </div>
+      <div class="swatch" aria-hidden="true"><i style="background:#9fd3e8"></i><i style="background:#f2801e"></i><i style="background:#d8c830"></i><i style="background:#f4877e"></i><i style="background:#e8399c"></i><i style="background:#8dc63f"></i></div>
+    </div></article>
+
+    <article class="card"><div class="in">
+      <header><span class="no">1/6</span><h2>Åpning</h2><span class="e" aria-hidden="true">📦</span></header>
+      <div class="body">
+        <p class="say">Trenger din kommune Facebook-flyttehjelp?</p>
+        <p class="sp">Hvem her har tenkt «nå holder det» om Facebook? Rekk opp hånda.</p>
+        <p><b>Dere er ikke alene.</b> Flere kommuner har allerede gått.</p>
+        <p>I dag: hvordan de gjorde det, svar på innvendingene, og hva som venter på andre siden.</p>
+      </div>
+    </div></article>
+
+    <article class="card"><div class="in">
+      <header><span class="no">2/6</span><h2>Fått nok</h2><span class="e" aria-hidden="true">🫠</span></header>
+      <div class="body">
+        <p>Mange norske kommuner har fått <b>nok av Facebook</b>.</p>
+        <p>Algoritmen bestemmer hvem som ser innleggene.</p>
+        <p class="say">Det er som å leie ut stua si til en som aldri betaler husleie.</p>
+        <p class="sp">Men <b>dørstokkmila er lang</b>: Hvor skal vi? Hva sier sjefen?</p>
+        <p><b>Hareid og Nordre Follo</b> har tatt grep, med tre enkle trinn.</p>
+      </div>
+    </div></article>
+
+    <article class="card"><div class="in">
+      <header><span class="no">3/6</span><h2>Tre trinn</h2><span class="e" aria-hidden="true">🪜</span></header>
+      <div class="body">
+        <div class="cols">
+          <div>
+            <h3><span aria-hidden="true">🏠</span>Hjemmesiden</h3>
+            <p class="t">Publiser alltid der først. En kanal dere eier selv.</p>
+          </div>
+          <div>
+            <h3><span aria-hidden="true">💌</span>Nyhetsbrev</h3>
+            <p class="t">Direkte til innbyggerne. Ingen algoritme imellom.</p>
+          </div>
+          <div>
+            <h3><span aria-hidden="true">🎨</span>Flytt tiden</h3>
+            <p class="t">Bruk kreativiteten på velprøvde og nye måter.</p>
+          </div>
+        </div>
+      </div>
+    </div></article>
+
+  </div>
+
+  <div class="sheet">
+    <article class="card"><div class="in">
+      <header><span class="no">4/6</span><h2>Innvendingen</h2><span class="e" aria-hidden="true">🙄</span></header>
+      <div class="body">
+        <p class="say">«Vi må jo være der brukerne våre er!»</p>
+        <div class="cols sp">
+          <div>
+            <h3><span aria-hidden="true">🦗</span>Få leser</h3>
+            <p class="t">De fleste følgerne scroller raskt forbi.</p>
+          </div>
+          <div>
+            <h3><span aria-hidden="true">👀</span>Personvern</h3>
+            <p class="t">Brukerdata mates inn i Metas KI-trening.</p>
+          </div>
+          <div>
+            <h3><span aria-hidden="true">✨</span>Noe bedre</h3>
+            <p class="t">Det finnes noe mye bedre enn Facebook.</p>
+          </div>
+        </div>
+      </div>
+    </div></article>
+
+    <article class="card"><div class="in">
+      <header><span class="no">5/6</span><h2>Eurosky</h2><span class="e" aria-hidden="true">🌍</span></header>
+      <div class="body">
+        <p>På Eurosky bygges <b>framtidens sosiale medie-økosystem</b>.</p>
+        <p><b>Ingen plattform låser dere inne.</b> Mange løsninger finnes allerede.</p>
+        <p>Flere kommer tidlig 2027, også skreddersydd for norske behov.</p>
+        <div class="cols sp" style="--n:2">
+          <div>
+            <h3><span aria-hidden="true">⚡</span>I gang nå</h3>
+            <p class="t">Opprett en bruker for kommunen. Det er lett.</p>
+          </div>
+          <div>
+            <h3><span aria-hidden="true">🧭</span>Lære mer først</h3>
+            <p class="t">Fritt Ord, første kvartal 2027. Fysisk og strømmet. Meld interesse!</p>
+          </div>
+        </div>
+      </div>
+    </div></article>
+
+    <article class="card"><div class="in">
+      <header><span class="no">6/6</span><h2>Avslutning</h2><span class="e" aria-hidden="true">🛸</span></header>
+      <div class="body">
+        <p>Oppsummert: hjemmesiden, nyhetsbrev, flytt tiden.</p>
+        <p>Det finnes noe mye bedre, og dere kan være med fra starten.</p>
+        <p>Meld interesse for arrangementet hos Fritt Ord.</p>
+        <p class="say sp">Bli med Demokratiløftet, fra FB til framtiden.</p>
+        <!-- TODO: Plassholder. Sjekk at lenken virker før kortene brukes. -->
+        <p><b>demokratiloftet.no/kommuneguide</b></p>
+        <p class="say">Takk!</p>
+      </div>
+    </div></article>
+
+    <article class="card back"><div class="in">
+      <h2 class="big">Bli med <span class="a">Demokratiløftet</span> <span class="b">fra FB</span> <span class="c">til framtiden</span> <span class="e" aria-hidden="true">🛸</span></h2>
+      <div>
+        <!-- TODO: Plassholder. Sjekk at lenken virker før kortene trykkes. -->
+        <p class="url">demokratiloftet.no/kommuneguide</p>
+        <p class="kicker">Meld interesse for arrangementet hos Fritt Ord</p>
+      </div>
+    </div></article>
+  </div>
+
+</main>
+</body>
+</html>
