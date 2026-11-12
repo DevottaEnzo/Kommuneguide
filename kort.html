@@ -76,7 +76,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--mustard); outli
   display: flex; align-items: flex-end; gap: calc(2.5 * var(--mm));
   height: calc(10 * var(--mm));
   border-bottom: calc(.5 * var(--mm)) solid var(--red);
-  padding-bottom: calc(1 * var(--mm));
+  /* Linjene går helt ut til kanten, som på et ekte indekskort */
+  margin: 0 calc(-7 * var(--mm));
+  padding: 0 calc(7 * var(--mm)) calc(1 * var(--mm));
 }
 .in .no {
   font-weight: 700; font-size: .72em; letter-spacing: .06em; color: #8a877f;
@@ -91,7 +93,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--mustard); outli
 
 .body {
   flex: 1;
-  margin-top: calc(2.5 * var(--mm));
+  margin: calc(2.5 * var(--mm)) calc(-7 * var(--mm)) calc(-4 * var(--mm));
+  padding: 0 calc(7 * var(--mm));
   line-height: var(--rule);
   background: repeating-linear-gradient(to bottom,
     transparent 0 calc(var(--rule) - 1px),
