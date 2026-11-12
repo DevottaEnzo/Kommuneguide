@@ -68,7 +68,22 @@ h1 .l { color: var(--orange); }
   max-width: 20em;
   margin: 0 0 40px;
 }
-.swatch { display: flex; height: 12px; max-width: 420px; margin-bottom: 48px; }
+.swatch { display: flex; height: 12px; max-width: 420px; margin: 40px 0 48px; }
+.hero .btn { margin-top: -8px; }
+
+/* Emoji */
+.sticker {
+  display: inline-block; font-size: .55em; vertical-align: .35em;
+  transform: rotate(12deg);
+}
+.emo { display: inline-block; transform: rotate(-8deg); }
+.card .e, .panelcard .e {
+  display: block; font-size: 56px; line-height: 1; margin-bottom: 16px;
+  transform: rotate(-6deg); transform-origin: left bottom;
+  transition: transform .15s ease;
+}
+.panelcard .e { font-size: 44px; }
+.card:hover .e { transform: rotate(4deg) scale(1.1); }
 .swatch i { flex: 1; }
 
 
@@ -210,5 +225,6 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: s
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .card, .btn { transition: none; }
-  .card:hover, .btn:hover { transform: none; }
+  .card:hover, .btn:hover, .card:hover .e { transform: none; }
+  .card .e { transition: none; }
 }
