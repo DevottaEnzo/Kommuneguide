@@ -207,6 +207,18 @@ figcaption.src { color: var(--muted); font-size: 15px; letter-spacing: .04em; ma
 }
 .btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--line); }
 
+/* Interesseskjema */
+.form { display: grid; gap: 14px; margin-top: 20px; }
+.form label { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+.form input {
+  font: inherit; font-weight: 400; color: var(--text);
+  background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+  padding: 10px 12px; width: 100%;
+}
+.form input:focus { outline: 3px solid var(--mustard); outline-offset: 1px; border-color: transparent; }
+.form .btn { justify-self: start; margin-top: 6px; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+.form .thanks { margin: 4px 0 0; color: var(--green); font-weight: 600; }
+
 /* Closing */
 .close { padding: 96px 0 104px; text-align: center; }
 .close h2 { font-size: clamp(40px, 9vw, 96px); line-height: 1; margin: 0 auto 32px; max-width: 10em; }
