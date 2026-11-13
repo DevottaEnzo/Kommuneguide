@@ -196,6 +196,7 @@ figcaption.src { color: var(--muted); font-size: 15px; letter-spacing: .04em; ma
 }
 .panelcard p { margin: 0 0 16px; max-width: none; }
 .panelcard p:last-child { margin-bottom: 0; }
+.panelcard .lead { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.3; color: var(--c); }
 .link { font-weight: 600; text-underline-offset: 4px; }
 .btn {
   display: inline-block;
